@@ -13,9 +13,9 @@ exports.item_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_detail = asyncHandler(async (req, res, next) => {
-	const [item, bundlesWithItem] = Promise.all([
+	const [item, bundlesWithItem] = await Promise.all([
 		Item.findById(req.params.id).populate('categories').exec(),
-		Bundle.find({ items: { $all: item._id } }),
+		Bundle.find({ items: req.params.id }).exec(),
 	]);
 
 	if (item === null) {
@@ -26,7 +26,6 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 	}
 
 	res.render('item_detail', {
-		title: item.name,
 		item: item,
 		bundle_list: bundlesWithItem,
 	});
