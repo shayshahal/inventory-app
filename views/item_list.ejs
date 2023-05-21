@@ -1,6 +1,8 @@
 <h1><%=title%></h1>
 <ul>
 	<% item_list.forEach(item => { %>
-	<li><a href="<%=item.url%>"><%=item.name%></a> <span>item.price</span></li>
+	<li>
+		<a href="<%=item.url%>"><%=item.name%></a> <span><%=item.price%></span>
+	</li>
 	<% }) %>
 </ul>
