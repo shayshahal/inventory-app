@@ -1,0 +1,88 @@
+<h1><%=title%></h1>
+<form
+	method="POST"
+	action=""
+>
+	<label for="name">
+		Name:
+		<input
+			type="text"
+			name="name"
+			id="name"
+		/>
+	</label>
+	<label for="price">
+		Price:
+		<input
+			type="number"
+			price="price"
+			id="price"
+		/>
+	</label>
+	<fieldset>
+		<legend>Stats</legend>
+		<label for="attack_damage">
+			Attack Damage:
+			<input
+				type="number"
+				name="attack_damage"
+				id="attack_damage"
+			/>
+		</label>
+		<label for="magic_power">
+			Magic Power:
+			<input
+				type="number"
+				name="magic_power"
+				id="magic_power"
+			/>
+		</label>
+		<label for="attack_speed">
+			Attack Speed:
+			<input
+				type="number"
+				name="attack_speed"
+				id="attack_speed"
+			/>
+		</label>
+		<label for="crit_chance">
+			Critical Strike Chance:
+			<input
+				type="number"
+				name="crit_chance"
+				id="crit_chance"
+			/>
+		</label>
+	</fieldset>
+	<div>
+		<% categories.forEach(category => { %>
+		<label for="<%=category._id%>">
+			<input
+				type="checkbox"
+				name="<%=category._id%>"
+				id="<%=category._id%>"
+				value="<%=category._id%>"
+			/>
+			<%=category.name%>
+		</label>
+		<% }) %>
+		<a href="/category/create">Add a category</a>
+	</div>
+	<label for="image"
+		>Upload an Image:
+		<input
+			type="file"
+			name="image"
+			id="image"
+			value="image"
+		/>
+	</label>
+	<button>Submit</button>
+</form>
+<% if (locals.errors) { %>
+<ul>
+	<% errors.forEach(error => { %>
+	<li><%=error.msg%></li>
+	<% }) %>
+</ul>
+<% } %>

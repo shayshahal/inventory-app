@@ -1,5 +1,6 @@
 const Item = require('../models/Item');
 const Bundle = require('../models/Bundle');
+const Category = require('../models/Category');
 
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
@@ -28,5 +29,14 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
 	res.render('item_detail', {
 		item: item,
 		bundle_list: bundlesWithItem,
+	});
+});
+
+exports.item_create_get = asyncHandler(async (req, res, next) => {
+	const allCategories = await Category.find().exec();
+
+	res.render('item_form', {
+		title: 'Create a new item',
+		categories: allCategories,
 	});
 });
