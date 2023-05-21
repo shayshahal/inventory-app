@@ -1,0 +1,9 @@
+<h1><%=title%></h1>
+<ul>
+	<% bundle_list.forEach(bundle => { %>
+	<li>
+		<a href="<%=bundle.url%>"><%=bundle.name%></a>
+		<span><%=bundle.description%></span>
+	</li>
+	<% }) %>
+</ul>
