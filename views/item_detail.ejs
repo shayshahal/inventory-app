@@ -1,0 +1,23 @@
+<% if (item.image) { %>
+<img
+	src="<%=item.image%>"
+	alt="<%=item.name%> image"
+/>
+<% } %>
+<h1><%=item.name%></h1>
+<h2><%=item.price%> $</h2>
+<ul>
+	<% for(const [k, v] of item.stats){%>
+	<li><%=k%> - <%=v%></li>
+	<% } %>
+</ul>
+<ul>
+	<% item.categories.forEach(category => { %>
+	<li><%=category.name%></li>
+	<% }) %>
+</ul>
+<ul>
+	<% bundle_list.forEach(bundle => { %>
+	<li><a href="<%=bundle.url%>"><%=bundle.name%></a></li>
+	<% }) %>
+</ul>
