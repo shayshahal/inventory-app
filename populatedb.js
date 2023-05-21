@@ -3,7 +3,7 @@
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
 
-const Item = require('./models/item');
+const Item = require('./models/Item');
 const Category = require('./models/Category');
 const Bundle = require('./models/Bundle');
 
