@@ -10,7 +10,7 @@ const BundleSchema = new Schema({
 	image: { type: String },
 });
 
-BookInstanceSchema.virtual('url').get(function () {
+BundleSchema.virtual('url').get(function () {
 	// We don't use an arrow function as we'll need the this object
 	return `/bundle/${this._id}`;
 });
