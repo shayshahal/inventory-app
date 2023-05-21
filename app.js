@@ -5,7 +5,31 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const expressLayouts = require('express-ejs-layouts');
+const helmet = require('helmet');
+const compression = require('compression');
 const app = express();
+
+// Set up rate limiter: maximum of twenty requests per minute
+const RateLimit = require('express-rate-limit');
+const limiter = RateLimit({
+	windowMs: 1 * 10 * 1000, // 10 seconds
+	max: 10,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
+
+// Set up mongoose connection
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+
+const dev_db_url =
+	'mongodb+srv://shay:shahal@cluster0.7e0qbgi.mongodb.net/?retryWrites=true&w=majority';
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
+
+main().catch((err) => console.log(err));
+async function main() {
+	await mongoose.connect(mongoDB);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -17,6 +41,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+	helmet.contentSecurityPolicy({
+		directives: {
+			'script-src': ["'self'"],
+		},
+	})
+);
+
+app.use(compression()); // Compress all routes
 
 app.use('/', indexRouter);
 
