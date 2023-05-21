@@ -1,0 +1,7 @@
+<h1><%=bundle.name%></h1>
+<p><%=bundle.description%></p>
+<ul>
+	<% bundle.items.forEach(item => { %>
+	<li><a href="<%=item.url%>"><%=item.name%></a></li>
+	<% }) %>
+</ul>
