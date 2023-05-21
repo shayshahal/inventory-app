@@ -1,0 +1,9 @@
+<h1><%=title%></h1>
+<ul>
+	<% category_list.forEach(category => { %>
+	<li>
+		<a href="<%=category.url%>"><%=category.name%></a>
+		<span><%=category.description%></span>
+	</li>
+	<% }) %>
+</ul>
