@@ -50,7 +50,9 @@ exports.bundle_create_post = [
 		.trim()
 		.isLength({ min: 2 })
 		.escape(),
-	body('item', 'must contain at least 2 item').isLength({ min: 2 }).escape(),
+	body('item', 'must contain at least 2 item')
+		.custom((value) => value.length > 1)
+		.escape(),
 	body('discount', 'must enter a discount')
 		.trim()
 		.notEmpty()
