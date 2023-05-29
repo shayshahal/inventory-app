@@ -95,3 +95,22 @@ exports.bundle_create_post = [
 		}
 	}),
 ];
+
+exports.bundle_update_get = asyncHandler(async (req, res, next) => {
+	const [bundle, allItems] = await Promise.all[
+		(Bundle.findById(req.params.id), Item.find().exec())
+	];
+
+	if (bundle === null) {
+		// No results.
+		const err = new Error('Bundle not found');
+		err.status = 404;
+		return next(err);
+	}
+
+	res.render('bundle_form', {
+		title: 'Create a new bundle',
+		item_list: allItems,
+		bundle: bundle,
+	});
+});
