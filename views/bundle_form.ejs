@@ -12,6 +12,15 @@
 			value="<%=locals.bundle !== undefined ? bundle.name : ''%>"
 		/>
 	</label>
+	<label for="discount">
+		Discount:
+		<input
+			type="number"
+			name="discount"
+			id="discount"
+			value="<%=locals.bundle !== undefined ? bundle.discount : ''%>"
+		/>
+	</label>
 	<fieldset>
 		<legend>Items</legend>
 		<% item_list.forEach(item => { %>
