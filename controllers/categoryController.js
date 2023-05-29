@@ -116,7 +116,7 @@ exports.category_update_post = [
 ];
 
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
-	const [category] = await category.findById(req.params.id).exec();
+	const category = await category.findById(req.params.id).exec();
 
 	if (category === null) {
 		// No results.
