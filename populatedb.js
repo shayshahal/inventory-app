@@ -114,7 +114,7 @@ async function createItems() {
 }
 
 async function createBundles() {
-	console.log('Adding Books');
+	console.log('Adding Bundles');
 	await Promise.all([
 		bundleCreate('Ranged Weapons', [items[1], items[2]], 20),
 	]);
