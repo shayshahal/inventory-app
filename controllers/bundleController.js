@@ -192,3 +192,15 @@ exports.bundle_delete_get = asyncHandler(async (req, res, next) => {
 		bundle: bundle,
 	});
 });
+
+exports.bundle_delete_post = asyncHandler(async (req, res, next) => {
+	const bundle = await Bundle.findById(req.params.id).exec();
+
+	if (bundle === null) {
+		// No results.
+		res.redirect('/categories');
+	} else {
+		await bundle.findByIdAndRemove(req.params.id);
+		res.redirect('/categories');
+	}
+});
