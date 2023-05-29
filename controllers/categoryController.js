@@ -37,7 +37,6 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
 	});
 });
 
-
 exports.category_create_post = [
 	// Validate and sanitize fields.
 	body('name', 'Name must be at least 2 characters.')
@@ -48,9 +47,10 @@ exports.category_create_post = [
 		const errors = validationResult(req);
 
 		const categoryDetail = {
-			name: req.body.name
+			name: req.body.name,
 		};
-		if (req.body.description) categoryDetail.description = req.body.description;
+		if (req.body.description)
+			categoryDetail.description = req.body.description;
 		const category = new Category(categoryDetail);
 
 		if (!errors.isEmpty()) {
@@ -81,3 +81,36 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
 		category: category,
 	});
 });
+
+exports.category_update_post = [
+	// Validate and sanitize fields.
+	body('name', 'Name must be at least 2 characters.')
+		.trim()
+		.isLength({ min: 2 })
+		.escape(),
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
+
+		const categoryDetail = {
+			name: req.body.name,
+			_id: req.params.id,
+		};
+		if (req.body.description)
+			categoryDetail.description = req.body.description;
+		const category = new Category(categoryDetail);
+
+		if (!errors.isEmpty()) {
+			res.render('category_form', {
+				title: 'Update category',
+				category: category,
+				errors: errors.array(),
+			});
+		} else {
+			const updatedCategory = await Category.findByIdAndUpdate(
+				req.params.id,
+				category
+			);
+			res.redirect(updatedCategory.url);
+		}
+	}),
+];
