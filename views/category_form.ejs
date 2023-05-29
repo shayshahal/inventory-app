@@ -1,0 +1,32 @@
+<h1><%=title%></h1>
+<form
+	method="POST"
+	action=""
+>
+	<label for="name">
+		Name:
+		<input
+			type="text"
+			name="name"
+			id="name"
+			value="<%=locals.category !== undefined ? category.name : ''%>"
+		/>
+	</label>
+	<label for="description">
+		<textarea
+			name="description"
+			id="'description"
+			maxlength="100"
+			value="<%=locals.category !== undefined ? category.description : ''%>"
+		></textarea>
+	</label>
+	<button>Submit</button>
+</form>
+<!-- TODO: maybe do individual message presentation to each field/input -->
+<% if (locals.errors) { %>
+<ul>
+	<% errors.forEach(error => { %>
+	<li><%=error.msg%></li>
+	<% }) %>
+</ul>
+<% } %>
