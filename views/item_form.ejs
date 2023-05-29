@@ -55,20 +55,16 @@
 			/>
 		</label>
 	</fieldset>
-	<div>
-		<% categories.forEach(category => { %>
+	<label for="category">
+		Category: <% categories.forEach(category => { %>
 		<label for="<%=category._id%>">
-			<input
-				type="checkbox"
-				name="<%=category._id%>"
-				id="<%=category._id%>"
-				value="<%=category._id%>"
-			/>
-			<%=category.name%>
+			<input type="checkbox" name="category" id="<%=category._id%>"
+			value="<%=category._id%>" <%= (category.checked ? 'checked' :
+			'')%>/> <%=category.name%>
 		</label>
 		<% }) %>
 		<a href="/category/create">Add a category</a>
-	</div>
+	</label>
 	<label for="image"
 		>Upload an Image:
 		<input
