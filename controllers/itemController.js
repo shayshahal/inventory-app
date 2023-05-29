@@ -211,3 +211,26 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 		bundle_list: allBundlesWithItem,
 	});
 });
+
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+	const [item, bundlesWithItem] = await Promise.all([
+		Item.findById(req.params.id).populate('categories').exec(),
+		Bundle.find({ items: req.params.id }).exec(),
+	]);
+
+	if (item === null) {
+		// No results.
+		res.redirect('/items');
+	}
+	if (bundlesWithItem.length > 0) {
+		// Book has book_instances. Render in same way as for GET route.
+		res.render('book_delete', {
+			title: 'Delete Book',
+			item: item,
+			bundle_list: bundlesWithItem,
+		});
+	} else {
+		await Item.findByIdAndRemove(req.params.id);
+		res.redirect('/items');
+	}
+});
