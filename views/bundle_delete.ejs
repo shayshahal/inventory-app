@@ -1,0 +1,19 @@
+<h1><%=title%>: <%=bundle.name%></h1>
+<p>Do you really want to delete this bundle?</p>
+
+<form
+	action=""
+	method="POST"
+>
+	<label for="bundle">
+		<input
+			type="hidden"
+			name="bundle"
+			value="<%=bundle.name%>"
+			id="bundle"
+			required
+		/>
+	</label>
+	<button type="submit">Delete</button>
+</form>
+

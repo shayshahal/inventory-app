@@ -178,3 +178,17 @@ exports.bundle_update_post = [
 		}
 	}),
 ];
+
+exports.bundle_delete_get = asyncHandler(async (req, res, next) => {
+	const bundle = await Bundle.findById(req.params.id).exec();
+
+	if (bundle === null) {
+		// No results.
+		res.redirect('/categories');
+	}
+
+	res.render('bundle_delete', {
+		title: 'Delete bundle',
+		bundle: bundle,
+	});
+});
