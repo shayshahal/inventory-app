@@ -109,8 +109,72 @@ exports.bundle_update_get = asyncHandler(async (req, res, next) => {
 	}
 
 	res.render('bundle_form', {
-		title: 'Create a new bundle',
+		title: 'Update bundle',
 		item_list: allItems,
 		bundle: bundle,
 	});
 });
+
+exports.bundle_update_post = [
+	// Convert the item to an array.
+	(req, res, next) => {
+		if (!(req.body.item instanceof Array)) {
+			if (typeof req.body.item === 'undefined') req.body.item = [];
+			else req.body.item = new Array(req.body.item);
+		}
+		next();
+	},
+	// Validate and sanitize fields.
+	body('name', 'Name must be at least 2 characters.')
+		.trim()
+		.isLength({ min: 2 })
+		.escape(),
+	body('item', 'must contain at least 2 item')
+		.custom((value) => value.length > 1)
+		.escape(),
+	body('discount', 'must enter a discount')
+		.trim()
+		.notEmpty()
+		.if(body('discount').notEmpty())
+		.isInt({ gt: 0 })
+		.withMessage('discount must be larger than zero.')
+		.escape(),
+
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
+
+		const bundleDetail = {
+			name: req.body.name,
+			items: req.body.item,
+			discount: req.body.discount,
+			_id: req.params.id,
+		};
+		if (req.body.description)
+			bundleDetail.description = req.body.description;
+		if (req.body.image) bundleDetail.image = req.body.image;
+		const bundle = new Bundle(bundleDetail);
+
+		if (!errors.isEmpty()) {
+			const allItems = await Item.find().exec();
+
+			for (const item of allItems) {
+				if (bundle.items.indexOf(item._id) > -1) {
+					item.checked = 'true';
+				}
+			}
+
+			res.render('bundle_form', {
+				title: 'Update bundle',
+				item_list: allItems,
+				bundle: bundle,
+				errors: errors.array(),
+			});
+		} else {
+			const updatedBundle = await Bundle.findByIdAndUpdate(
+				req.params.id,
+				bundle
+			);
+			res.redirect(updatedBundle.url);
+		}
+	}),
+];
