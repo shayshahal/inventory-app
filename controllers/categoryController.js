@@ -30,3 +30,9 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 		item_list: itemsWithCategory,
 	});
 });
+
+exports.category_create_get = asyncHandler(async (req, res, next) => {
+	res.render('category_form', {
+		title: 'Create a new category',
+	});
+});
