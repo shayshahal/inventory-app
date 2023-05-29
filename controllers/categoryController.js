@@ -129,3 +129,14 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
 	});
 });
 
+exports.category_delete_post = asyncHandler(async (req, res, next) => {
+	const category = await Category.findById(req.params.id).exec();
+
+	if (category === null) {
+		// No results.
+		res.redirect('/categories');
+	} else {
+		await Category.findByIdAndRemove(req.params.id);
+		res.redirect('/categories');
+	}
+});
