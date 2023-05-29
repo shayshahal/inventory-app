@@ -114,3 +114,18 @@ exports.category_update_post = [
 		}
 	}),
 ];
+
+exports.category_delete_get = asyncHandler(async (req, res, next) => {
+	const [category] = await category.findById(req.params.id).exec();
+
+	if (category === null) {
+		// No results.
+		res.redirect('/categories');
+	}
+
+	res.render('category_delete', {
+		title: 'Delete category',
+		category: category,
+	});
+});
+
