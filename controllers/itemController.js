@@ -102,3 +102,29 @@ exports.item_create_post = [
 		}
 	}),
 ];
+
+exports.item_update_get = asyncHandler(async (req, res, next) => {
+	const [item, allCategories] = await Promise.all([
+		Item.findById(req.params.id),
+		Category.find().exec(),
+	]);
+
+	if (item === null) {
+		// No results.
+		const err = new Error('item not found');
+		err.status = 404;
+		return next(err);
+	}
+
+	for (const category of allCategories) {
+		if (item.categories.indexOf(category._id) > -1) {
+			category.checked = 'true';
+		}
+	}
+
+	res.render('item_form', {
+		title: 'Update Item',
+		categories: allCategories,
+		item: item,
+	});
+});
