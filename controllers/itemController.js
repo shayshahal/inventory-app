@@ -214,7 +214,7 @@ exports.item_delete_get = asyncHandler(async (req, res, next) => {
 
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
 	const [item, bundlesWithItem] = await Promise.all([
-		Item.findById(req.params.id).populate('categories').exec(),
+		Item.findById(req.params.id).exec(),
 		Bundle.find({ items: req.params.id }).exec(),
 	]);
 
@@ -224,8 +224,8 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
 	}
 	if (bundlesWithItem.length > 0) {
 		// Book has book_instances. Render in same way as for GET route.
-		res.render('book_delete', {
-			title: 'Delete Book',
+		res.render('category_delete', {
+			title: 'Delete Category',
 			item: item,
 			bundle_list: bundlesWithItem,
 		});
