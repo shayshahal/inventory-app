@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 const ItemSchema = new Schema({
 	name: { type: String, required: true },
 	price: { type: Number, required: true },
-	image: { type: String },
 	stats: { type: Map, of: Number, required: true },
 	categories: [
 		{ type: Schema.Types.ObjectId, ref: 'Category', required: true },
 	],
+	image: { type: String },
 });
 
 ItemSchema.virtual('url').get(function () {
