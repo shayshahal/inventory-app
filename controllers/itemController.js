@@ -193,3 +193,21 @@ exports.item_update_post = [
 		}
 	}),
 ];
+
+exports.item_delete_get = asyncHandler(async (req, res, next) => {
+	const [item, allBundlesWithItem] = await Promise.all([
+		Item.findById(req.params.id).exec(),
+		Bundle.find({ items: req.params.id }, 'name').exec(),
+	]);
+
+	if (item === null) {
+		// No results.
+		res.redirect('/items');
+	}
+
+	res.render('item_delete', {
+		title: 'Delete item',
+		item: item,
+		bundle_list: allBundlesWithItem,
+	});
+});
