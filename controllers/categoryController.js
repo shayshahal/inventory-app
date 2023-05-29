@@ -36,3 +36,32 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
 		title: 'Create a new category',
 	});
 });
+
+
+exports.category_create_post = [
+	// Validate and sanitize fields.
+	body('name', 'Name must be at least 2 characters.')
+		.trim()
+		.isLength({ min: 2 })
+		.escape(),
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
+
+		const categoryDetail = {
+			name: req.body.name
+		};
+		if (req.body.description) categoryDetail.description = req.body.description;
+		const category = new Category(categoryDetail);
+
+		if (!errors.isEmpty()) {
+			res.render('category_form', {
+				title: 'Create a new category',
+				category: category,
+				errors: errors.array(),
+			});
+		} else {
+			await category.save();
+			res.redirect(category.url);
+		}
+	}),
+];
