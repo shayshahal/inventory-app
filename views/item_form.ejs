@@ -9,6 +9,7 @@
 			type="text"
 			name="name"
 			id="name"
+			value="<%=locals.item !== undefined ? item.name : ''%>"
 		/>
 	</label>
 	<label for="price">
@@ -18,6 +19,7 @@
 			price="price"
 			name="price"
 			id="price"
+			value="<%=locals.item !== undefined ? item.price : ''%>"
 		/>
 	</label>
 	<fieldset>
