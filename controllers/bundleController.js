@@ -26,3 +26,13 @@ exports.bundle_detail = asyncHandler(async (req, res, next) => {
 		bundle: bundle,
 	});
 });
+
+exports.bundle_create_get = asyncHandler(async (req, res, next) => {
+	const allItems = await Item.find();
+
+	res.render('bundle_form', {
+		title: 'Create a new bundle',
+		item_list: allItems,
+	});
+});
+
