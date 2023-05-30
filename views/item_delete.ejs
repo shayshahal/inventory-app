@@ -7,13 +7,13 @@
 	>
 </p>
 <div>
-	<h4>Bundles:</h4>
-	<dl>
+	<hr />
+	<h3>Bundles:</h3>
+	<ul>
 		<% bundle_list.forEach(bundle => { %>
-		<hr />
-		<a href="<%=bundle.url%>"> <%=bundle.name%> </a>
+		<li><a href="<%=bundle.url%>"> <%=bundle.name%> </a></li>
 		<% }) %>
-	</dl>
+	</ul>
 </div>
 <% } else { %>
 <p>Do you really want to delete this item?</p>

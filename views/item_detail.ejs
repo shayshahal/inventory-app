@@ -6,21 +6,31 @@
 <% } %>
 <h1><%=item.name%></h1>
 <h2><%=item.price%> $</h2>
+<hr />
+
 <ul>
+	<h3>Stats:</h3>
 	<% for(const [k, v] of item.stats){%>
 	<li><%=k%> - <%=v%></li>
 	<% } %>
 </ul>
+<br />
 <ul>
+	<h3>Categories:</h3>
 	<% item.categories.forEach(category => { %>
 	<li><a href="<%=category.url%>"><%=category.name%></a></li>
 	<% }) %>
 </ul>
+<br />
 <ul>
+	<h3>Bundles:</h3>
 	<% bundle_list.forEach(bundle => { %>
 	<li><a href="<%=bundle.url%>"><%=bundle.name%></a></li>
 	<% }) %>
 </ul>
+<br />
 
-<a href="<%=item.url%>/update">Update item</a>
-<a href="<%=item.url%>/delete">Delete item</a>
+<div class="controls">
+	<a href="<%=item.url%>/update">Update item</a>
+	<a href="<%=item.url%>/delete">Delete item</a>
+</div>

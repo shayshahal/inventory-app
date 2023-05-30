@@ -2,9 +2,12 @@
 <ul>
 	<% item_list.forEach(item => { %>
 	<li>
-		<a href="<%=item.url%>"><%=item.name%></a> <span><%=item.price%></span>
+		<a href="<%=item.url%>"><%=item.name%></a>
+		<span> - <%=item.price%>$</span>
 	</li>
 	<% }) %>
 </ul>
 
-<a href="/item/create">Create a new item</a>
+<div class="controls">
+	<a href="/item/create">Create a new item</a>
+</div>
