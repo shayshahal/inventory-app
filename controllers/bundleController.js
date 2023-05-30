@@ -190,7 +190,7 @@ exports.bundle_delete_get = asyncHandler(async (req, res, next) => {
 
 	if (bundle === null) {
 		// No results.
-		res.redirect('/categories');
+		res.redirect('/bundles');
 	}
 
 	res.render('bundle_delete', {
