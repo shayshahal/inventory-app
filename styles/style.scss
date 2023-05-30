@@ -1,0 +1,130 @@
+$white: #fff6f5;
+$black: black;
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: $white;
+	color: $black;
+	display: grid;
+	height: 100vh;
+	height: 100svh;
+	grid-template-rows: auto 1fr auto;
+	grid-template-columns: repeat(7, 1fr);
+}
+header {
+	background-color: $black;
+	color: $white;
+	text-align: center;
+	grid-column: 1/-1;
+	padding: 1rem;
+}
+aside {
+	border-right: 1px solid $black;
+	li {
+		font-size: 2rem;
+		margin-block: 2rem;
+		display: flex;
+		a {
+			transition: transform 0.2s ease;
+			transform-origin: left;
+		}
+		a:hover {
+			transform: scale(1.1);
+		}
+	}
+}
+main {
+	grid-column: 2 / -1;
+	padding: 1em;
+	h1 {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	ul {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		gap: 1em;
+		h3 {
+			font-size: 2.5rem;
+		}
+		li {
+			font-size: 1.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.5em;
+			a {
+				background-color: $black;
+				color: $white;
+				padding: 1.5rem 4rem;
+			}
+		}
+	}
+	form {
+		width: 50%;
+		margin: auto;
+		padding: 1em;
+		border: 1px solid $black;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+
+		label {
+			display: block;
+			input[type='text'] {
+				border: 1px solid $black;
+				font-size: 1.25rem;
+				padding-left: 0.5em;
+				border-radius: 9999px;
+			}
+			input[type='number'] {
+				width: 6ch;
+				font-size: 1.5rem;
+			}
+		}
+		fieldset {
+			border: none;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			gap: 1em;
+			label {
+				background-color: $black;
+				color: $white;
+				cursor: pointer;
+				padding: 0.5rem 2rem;
+			}
+		}
+		button {
+			display: block;
+			align-self: stretch;
+			background-color: $black;
+			color: $white;
+			padding: 1rem 4rem;
+		}
+	}
+	.controls {
+		display: flex;
+		justify-content: end;
+		gap: 1em;
+		a {
+			background-color: $black;
+			color: $white;
+			padding: 1.5rem 4rem;
+			font-size: 1.5rem;
+		}
+	}
+}
+footer {
+	grid-column: 1 / -1;
+}
+ul {
+	list-style: none;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}

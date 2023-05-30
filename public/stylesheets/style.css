@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff6f5;
+  color: black;
+  display: grid;
+  height: 100vh;
+  height: 100svh;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+header {
+  background-color: black;
+  color: #fff6f5;
+  text-align: center;
+  grid-column: 1/-1;
+  padding: 1rem;
+}
+
+aside {
+  border-right: 1px solid black;
+}
+aside li {
+  font-size: 2rem;
+  margin-block: 2rem;
+  display: flex;
+}
+aside li a {
+  transition: transform 0.2s ease;
+  transform-origin: left;
+}
+aside li a:hover {
+  transform: scale(1.1);
+}
+
+main {
+  grid-column: 2/-1;
+  padding: 1em;
+}
+main h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+main ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1em;
+}
+main ul h3 {
+  font-size: 2.5rem;
+}
+main ul li {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+main ul li a {
+  background-color: black;
+  color: #fff6f5;
+  padding: 1.5rem 4rem;
+}
+main form {
+  width: 50%;
+  margin: auto;
+  padding: 1em;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+main form label {
+  display: block;
+}
+main form label input[type=text] {
+  border: 1px solid black;
+  font-size: 1.25rem;
+  padding-left: 0.5em;
+  border-radius: 9999px;
+}
+main form label input[type=number] {
+  width: 6ch;
+  font-size: 1.5rem;
+}
+main form fieldset {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1em;
+}
+main form fieldset label {
+  background-color: black;
+  color: #fff6f5;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+}
+main form button {
+  display: block;
+  align-self: stretch;
+  background-color: black;
+  color: #fff6f5;
+  padding: 1rem 4rem;
+}
+main .controls {
+  display: flex;
+  justify-content: end;
+  gap: 1em;
+}
+main .controls a {
+  background-color: black;
+  color: #fff6f5;
+  padding: 1.5rem 4rem;
+  font-size: 1.5rem;
+}
+
+footer {
+  grid-column: 1/-1;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=style.css.map */
