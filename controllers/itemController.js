@@ -1,7 +1,7 @@
 const Item = require('../models/Item');
 const Bundle = require('../models/Bundle');
 const Category = require('../models/Category');
-
+const upload = require('../uploader.js');
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
@@ -42,6 +42,7 @@ exports.item_create_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_create_post = [
+	upload.single('image'),
 	// Convert the category to an array.
 	(req, res, next) => {
 		if (!(req.body.category instanceof Array)) {
@@ -77,9 +78,8 @@ exports.item_create_post = [
 			},
 			categories: req.body.category,
 		};
-		if (req.body.image) itemDetail.image = req.body.image;
+		if (req.file) itemDetail.image = req.file.path;
 		const item = new Item(itemDetail);
-		console.log(item);
 
 		if (!errors.isEmpty()) {
 			const allCategories = await Category.find().exec();
@@ -130,6 +130,7 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_update_post = [
+	upload.single('image'),
 	// Convert the category to an array.
 	(req, res, next) => {
 		if (!(req.body.category instanceof Array)) {
@@ -166,7 +167,7 @@ exports.item_update_post = [
 			categories: req.body.category,
 			_id: req.params.id,
 		};
-		if (req.body.image) itemDetail.image = req.body.image;
+		if (req.file) itemDetail.image = req.file.path;
 		const item = new Item(itemDetail);
 
 		if (!errors.isEmpty()) {
