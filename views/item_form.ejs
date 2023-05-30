@@ -16,7 +16,6 @@
 		Price:
 		<input
 			type="number"
-			price="price"
 			name="price"
 			id="price"
 			value="<%=locals.item !== undefined ? item.price : ''%>"
@@ -27,38 +26,55 @@
 		<label for="attack_damage">
 			Attack Damage:
 			<input
-				type="number"
+				type="range"
 				name="attack_damage"
 				id="attack_damage"
+				min="-100"
+				max="100"
+				steps="1"
+				value="<%=(locals.item !== undefined ? item.stats.get('Attack Damage') : '0')%>"
 			/>
 		</label>
 		<label for="magic_power">
 			Magic Power:
 			<input
-				type="number"
+				type="range"
 				name="magic_power"
 				id="magic_power"
+				min="-100"
+				max="100"
+				steps="1"
+				value="<%=(locals.item !== undefined ? item.stats.get('Magic Power') : '0')%>"
 			/>
 		</label>
 		<label for="attack_speed">
 			Attack Speed:
 			<input
-				type="number"
+				type="range"
 				name="attack_speed"
 				id="attack_speed"
+				min="0"
+				max="100"
+				steps="1"
+				value="<%=(locals.item !== undefined ? item.stats.get('Attack Speed') : '0')%>"
 			/>
 		</label>
 		<label for="crit_chance">
 			Critical Strike Chance:
 			<input
-				type="number"
+				type="range"
 				name="crit_chance"
 				id="crit_chance"
+				min="0"
+				max="100"
+				steps="1"
+				value="<%=(locals.item !== undefined ? item.stats.get('Critical Strike Chance') : '0')%>"
 			/>
 		</label>
 	</fieldset>
-	<label for="category">
-		Category: <% categories.forEach(category => { %>
+	<fieldset>
+		<legend>Category</legend>
+		<% categories.forEach(category => { %>
 		<label for="<%=category._id%>">
 			<input type="checkbox" name="category" id="<%=category._id%>"
 			value="<%=category._id%>" <%= (category.checked ? 'checked' :
@@ -66,11 +82,12 @@
 		</label>
 		<% }) %>
 		<a href="/category/create">Add a category</a>
-	</label>
+	</fieldset>
 	<label for="image"
 		>Upload an Image:
 		<input
 			type="file"
+			accept="image/png, image/jpeg"
 			name="image"
 			id="image"
 			value="image"
@@ -78,6 +95,7 @@
 	</label>
 	<button>Submit</button>
 </form>
+<!-- TODO: maybe do individual message presentation to each field/input -->
 <% if (locals.errors) { %>
 <ul>
 	<% errors.forEach(error => { %>
