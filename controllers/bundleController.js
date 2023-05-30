@@ -1,8 +1,9 @@
 const Item = require('../models/Item');
 const Bundle = require('../models/Bundle');
-
+const upload = require('../uploader.js');
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
+
 exports.bundle_list = asyncHandler(async (req, res, next) => {
 	const allBundles = await Bundle.find().sort({ name: 1 }).exec();
 	res.render('bundle_list', {
@@ -37,6 +38,7 @@ exports.bundle_create_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.bundle_create_post = [
+	upload.single('image'),
 	// Convert the item to an array.
 	(req, res, next) => {
 		if (!(req.body.item instanceof Array)) {
@@ -122,6 +124,7 @@ exports.bundle_update_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.bundle_update_post = [
+	upload.single('image'),
 	// Convert the item to an array.
 	(req, res, next) => {
 		if (!(req.body.item instanceof Array)) {
