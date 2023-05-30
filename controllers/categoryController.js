@@ -1,6 +1,5 @@
 const Item = require('../models/Item');
 const Category = require('../models/Category');
-const upload = require('../uploader.js');
 
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
@@ -39,7 +38,6 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_create_post = [
-	upload.single('image'),
 	// Validate and sanitize fields.
 	body('name', 'Name must be at least 2 characters.')
 		.trim()
@@ -85,7 +83,6 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_update_post = [
-	upload.single('image'),
 	// Validate and sanitize fields.
 	body('name', 'Name must be at least 2 characters.')
 		.trim()
