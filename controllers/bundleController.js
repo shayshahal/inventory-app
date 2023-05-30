@@ -204,9 +204,9 @@ exports.bundle_delete_post = asyncHandler(async (req, res, next) => {
 
 	if (bundle === null) {
 		// No results.
-		res.redirect('/categories');
+		res.redirect('/bundles');
 	} else {
-		await bundle.findByIdAndRemove(req.params.id);
-		res.redirect('/categories');
+		await Bundle.findByIdAndRemove(req.params.id);
+		res.redirect('/bundles');
 	}
 });
