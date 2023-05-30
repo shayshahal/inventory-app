@@ -97,9 +97,10 @@ exports.bundle_create_post = [
 ];
 
 exports.bundle_update_get = asyncHandler(async (req, res, next) => {
-	const [bundle, allItems] = await Promise.all[
-		(Bundle.findById(req.params.id), Item.find().exec())
-	];
+	const [bundle, allItems] = await Promise.all([
+		Bundle.findById(req.params.id),
+		Item.find().sort({ name: 1 }).exec(),
+	]);
 
 	if (bundle === null) {
 		// No results.
