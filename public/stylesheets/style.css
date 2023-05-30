@@ -41,6 +41,9 @@ main {
   grid-column: 2/-1;
   padding: 1em;
 }
+main img {
+  max-height: 200px;
+}
 main h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -107,6 +110,7 @@ main form button {
   background-color: black;
   color: #fff6f5;
   padding: 1rem 4rem;
+  cursor: pointer;
 }
 main .controls {
   display: flex;

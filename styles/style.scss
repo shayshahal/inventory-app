@@ -38,6 +38,9 @@ aside {
 main {
 	grid-column: 2 / -1;
 	padding: 1em;
+	img {
+		max-height: 200px;
+	}
 	h1 {
 		font-size: 3rem;
 		margin-bottom: 1rem;
@@ -104,6 +107,7 @@ main {
 			background-color: $black;
 			color: $white;
 			padding: 1rem 4rem;
+			cursor: pointer;
 		}
 	}
 	.controls {
