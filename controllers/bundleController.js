@@ -109,6 +109,11 @@ exports.bundle_update_get = asyncHandler(async (req, res, next) => {
 		return next(err);
 	}
 
+	for (const item of allItems) {
+		if (bundle.items.indexOf(item._id) > -1) {
+			item.checked = 'true';
+		}
+	}
 	res.render('bundle_form', {
 		title: 'Update bundle',
 		item_list: allItems,
