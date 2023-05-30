@@ -7,8 +7,10 @@ const indexRouter = require('./routes/index');
 const expressLayouts = require('express-ejs-layouts');
 const helmet = require('helmet');
 const compression = require('compression');
-const app = express();
+const dotenv = require('dotenv');
 
+const app = express();
+dotenv.config();
 // Set up rate limiter: maximum of twenty requests per minute
 const RateLimit = require('express-rate-limit');
 const limiter = RateLimit({
@@ -22,8 +24,7 @@ app.use(limiter);
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
-const dev_db_url =
-	'mongodb+srv://shay:shahal@cluster0.7e0qbgi.mongodb.net/?retryWrites=true&w=majority';
+const dev_db_url = process.env.DEV_URL;
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 main().catch((err) => console.log(err));
